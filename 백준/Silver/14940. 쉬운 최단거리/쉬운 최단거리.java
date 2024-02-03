@@ -58,8 +58,8 @@ public class Main {
         answer[dest.x][dest.y] = 0;
         BFS(dest.x, dest.y);
 
-        for(int i = 0; i < row; i++){
-            for(int j = 0; j < col; j++){
+        for(int i = 0; i < answer.length; i++){
+            for(int j = 0; j < answer[0].length; j++){
                 if(board[i][j] == 1){
                 answer[i][j] = -1;
             }
