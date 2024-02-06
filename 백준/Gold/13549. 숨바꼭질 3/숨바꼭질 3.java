@@ -27,7 +27,7 @@ public class Main {
 
         while(!pq.isEmpty()){
             Person cur = pq.poll();
-            visited[cur.x] = 1;
+            
             if(cur.x == e) {
                 System.out.println(cur.time);
                 return;
@@ -35,16 +35,18 @@ public class Main {
             int nx = cur.x * 2;
             if(nx <=100000 && visited[nx] == 0){
                 pq.add(new Person(nx,cur.time));
-
+                visited[cur.x] = 1;
             }
-            
+
             nx = cur.x +1;
             if(nx >=0 && nx <=100000 && visited[nx] == 0){
                 pq.add(new Person(nx, cur.time+1));
+                visited[cur.x] = 1;
             }
             nx = cur.x -1;
             if(nx >=0 && nx <=100000 && visited[nx] == 0){
                 pq.add(new Person(nx, cur.time+1));
+                visited[cur.x] = 1;
             }
 
         }
