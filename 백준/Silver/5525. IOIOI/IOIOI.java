@@ -1,35 +1,24 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt(), M = sc.nextInt();
 
+        char[] arr = sc.next().toCharArray();
+        int[] memo = new int[M];
+        int ans = 0;
 
-    public static void main(String[] args) throws IOException {
-        Main T = new Main();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int answer = 0;
-        String s = "";
-        for(int i = 1; i<=2*n+1; i++){
-            if(i%2 == 1){
-                s+="I";
-            }else{
-                s+="O";
+        for (int i = 1; i < M - 1; i++) {
+            if (arr[i] == 'O' && arr[i + 1] == 'I') {
+                memo[i + 1] = memo[i - 1] + 1;
+
+                if (memo[i + 1] >= N && arr[i - 2 * N + 1] == 'I')
+                    ans++;
             }
         }
-        int m = Integer.parseInt(br.readLine());
-        String str = br.readLine();
-        for(int i = 0;  i <= m - s.length(); i++){
-            if(str.charAt(i) == 'I'){
-                String substring = str.substring(i, i + s.length());
-                if(substring.equals(s)) answer++;
-            }
-        }
-        System.out.println(answer);
 
-
-
+        System.out.println(ans);
 
     }
 }
