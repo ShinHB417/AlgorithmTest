@@ -25,19 +25,19 @@ public class Main {
     public static void prim(){
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.add(new Edge(1,0));
-        check[1] = true;
 
         while(!pq.isEmpty()){
             Edge cur = pq.poll();
             int curVex = cur.vex;
             int curCost = cur.cost;
             if(check[curVex] == false){
+                //여기서 확정
                 check[curVex] = true;
                 answer+= curCost;
-            }
-            for(Edge e : graph.get(curVex)){
-                if(check[e.vex] != true){
-                    pq.add(e);
+                for(Edge e : graph.get(curVex)){
+                    if(check[e.vex] != true){
+                        pq.add(e);
+                    }
                 }
             }
         }
