@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class Main {
@@ -10,20 +9,18 @@ class Main {
     static int[] dy = {0,1,0,-1};
 
     static int row,col,answer = Integer.MIN_VALUE;
-
     public static void DFS(int l,int x, int y, String str){
         for(int i = 0; i < 4; i++){
             int nx = x + dx[i];
             int ny = y + dy[i];
 
-            if(nx < 0 || nx >=row || ny < 0 || ny >=col) continue;
-            if(str.contains(String.valueOf(board[nx][ny]))) continue;
-
-            DFS(l+1,nx,ny,str+board[nx][ny]);
-
+            if(nx >=0 && nx < row && ny >=0 && ny < col && !str.contains(String.valueOf(board[nx][ny]))){
+                DFS(l+1,nx,ny,str+board[nx][ny]);
+            }
         }
         answer = Math.max(answer,l);
     }
+
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,9 +36,10 @@ class Main {
                 board[i][j] = str.charAt(j);
             }
         }
-
-        DFS(1,0,0,String.valueOf(board[0][0]));
+        DFS(1,0,0, String.valueOf(board[0][0]));
         System.out.println(answer);
+
+
 
 
 
