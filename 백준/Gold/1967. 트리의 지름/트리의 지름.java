@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -21,19 +20,18 @@ public class Main {
 
     static int first;
     public static void DFS(int start, int sum){
-        checked[start] = 1;
         if(sum >= max) {
             first = start;
             max = sum;
         }
-            for(Node n : graph.get(start)){
-                if(checked[n.v] == 0){
-                    checked[n.v] = 1;
-                    DFS(n.v, sum + n.w);
-                    checked[n.v] = 0;
-                }
-
+        for(Node n : graph.get(start)){
+            if(checked[n.v] == 0){
+                checked[n.v] = 1;
+                DFS(n.v, sum + n.w);
+                checked[n.v] = 0;
             }
+
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -55,21 +53,14 @@ public class Main {
             graph.get(a).add(new Node(b,c));
             graph.get(b).add(new Node(a,c));
         }
+        checked[1] = 1;
         DFS(1,0);
         max = Integer.MIN_VALUE;
         Arrays.fill(checked, 0);
 
+        checked[first] = 1;
         DFS(first,0);
         int answer = max;
         System.out.println(answer);
-
-
-
-
-
-
-
-
     }
-
 }
