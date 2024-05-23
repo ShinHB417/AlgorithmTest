@@ -12,25 +12,26 @@ public class Main {
     public static int BFS(){
         Queue<Integer> q = new LinkedList<>();
         q.add(1);
-        visited[1] = true;
         int l = 1;
         while(!q.isEmpty()){
             int len = q.size();
-            for(int j = 0; j < len; j++){
+            for(int i = 0; i < len; i++){
                 int cur = q.poll();
-                for(int i = 1; i<=6; i++){
-                    int nx = cur + i;
+                for(int j = 1; j <=6; j++){
+                    int nx = cur + j;
+                    if(nx > 100) continue;
                     if(nx == 100) return l;
-                    if(nx  > 100) continue;
-                    if(visited[nx] == true) continue;
-
-                    visited[nx] = true;
                     if(map.containsKey(nx)){
-                        //사다리에 있을 때
-                        q.add(map.get(nx));
+                        if(visited[map.get(nx)] == false){
+                            visited[map.get(nx)] = true;
+                            q.add(map.get(nx));
+                        }
                     }else{
-                        //아무것도 없을 때
-                        q.add(nx);
+                        if(visited[nx] == false){
+                            visited[nx] = true;
+                            q.add(nx);
+                        }
+
                     }
                 }
             }
@@ -44,8 +45,8 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken()); // 사다리
-        m = Integer.parseInt(st.nextToken()); // 뱀
+        n = Integer.parseInt(st.nextToken()); // 사다리 수
+        m = Integer.parseInt(st.nextToken()); // 뱀 수
         map = new HashMap<>();
         visited = new boolean[101];
 
@@ -60,12 +61,6 @@ public class Main {
         int answer =BFS();
 
         System.out.println(answer);
-
-
-
-
-
-
 
     }
 }
