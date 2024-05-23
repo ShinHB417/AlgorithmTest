@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 class Point{
     int x,y;
@@ -33,27 +36,27 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
-        Main T = new Main();
-        Scanner scan = new Scanner(System.in);
-        
-        col = scan.nextInt();
-        row = scan.nextInt();
-
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
+        st = new StringTokenizer(br.readLine());
+        col = Integer.parseInt(st.nextToken());
+        row = Integer.parseInt(st.nextToken());
         board = new int[row][col];
         dis = new int[row][col];
-        
+
         for(int i = 0; i < row; i++){
+            st = new StringTokenizer(br.readLine());
             for(int j = 0; j < col; j++){
-                int a = scan.nextInt();
-                if(a == 1){
+                board[i][j] = Integer.parseInt(st.nextToken());
+                if(board[i][j] == 1){
                     q.add(new Point(i,j));
                 }
-                board[i][j] = a;
             }
         }
         BFS();
-        
+
         for(int i = 0; i < row; i ++){
             for(int j = 0; j < col; j++){
                 if(board[i][j] == 0){
@@ -66,7 +69,3 @@ public class Main {
         System.out.println(answer);
     }
 }
-
-
-
-
